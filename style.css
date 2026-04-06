@@ -1,121 +1,53 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+body{
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
 }
 
-body {
-    background: #0e0e0e;
-    color: white;
+.panel{
+  width:180px;
+  height:120px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter: blur(15px);
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:0.5s;
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
 }
 
-/* CONTAINER */
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 15px;
+.panel:hover{
+  transform:rotateY(15deg) scale(1.1);
 }
 
-/* LOGO */
-.logo {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 20px;
+.locked{
+  opacity:0.4;
+  cursor:not-allowed;
 }
 
-.logo span {
-    color: #00ffcc;
+#clips{
+  margin-top:40px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
 }
 
-/* CATEGORIES */
-.categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
+.clip-card{
+  width:200px;
+  padding:10px;
+  background:rgba(255,255,255,0.08);
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
 
-.folder {
-    background: #1c1c1c;
-    padding: 10px;
-    border-radius: 12px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.folder:hover {
-    transform: scale(1.05);
-}
-
-.folder img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.folder p {
-    margin-top: 8px;
-    font-size: 14px;
-}
-
-/* LOCKED */
-.locked {
-    opacity: 0.5;
-    filter: grayscale(1);
-}
-
-/* SECTION */
-.hidden {
-    display: none;
-}
-
-.back {
-    background: #00ffcc;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-}
-
-/* CARD */
-.card {
-    background: #1c1c1c;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-/* VIDEO */
-.video-wrapper {
-    position: relative;
-}
-
-video {
-    width: 100%;
-    border-radius: 10px;
-    display: block;
-}
-
-/* BUTTON */
-button {
-    width: 100%;
-    margin-top: 8px;
-    padding: 10px;
-    background: #00ffcc;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover {
-    background: #00ddb0;
+button{
+  margin-top:10px;
+  padding:8px 12px;
+  border:none;
+  border-radius:10px;
+  background:#00ffd5;
+  cursor:pointer;
 }

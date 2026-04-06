@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,30 @@
 </head>
 <body>
 
-<h1>ClipMorph</h1>
+<h1 class="logo">CLIPMORPH</h1>
 
-<div class="card">
-  <p>VFX Clip</p>
-  <button onclick="buyClip('vfx/rdy1.mp4', 499)">Buy ₹499</button>
+<div class="panel-container">
+
+  <div class="panel" onclick="openPanel('vfx')">
+    <h2>VFX</h2>
+  </div>
+
+  <div class="panel" onclick="openPanel('green')">
+    <h2>GREEN</h2>
+  </div>
+
+  <div class="panel locked">
+    <h2>CRICKET 🔒</h2>
+  </div>
+
+  <div class="panel locked">
+    <h2>AI 🔒</h2>
+  </div>
+
 </div>
+
+<div id="clips"></div>
 
 <script src="script.js"></script>
 </body>
+</html>
