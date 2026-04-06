@@ -1,44 +1,33 @@
-require("dotenv").config();
-const express = require("express");
-const Razorpay = require("razorpay");
-const crypto = require("crypto");
-const cors = require("cors");
+function openCategory(type) {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("category").classList.remove("hidden");
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+  document.getElementById("title").innerText = type.toUpperCase();
 
-const razorpay = new Razorpay({
-  key_id: process.env.KEY_ID,
-  key_secret: process.env.KEY_SECRET
-});
+  const grid = document.getElementById("clipGrid");
+  grid.innerHTML = "Loading...";
 
-app.post("/create-order", async (req,res)=>{
-  const order = await razorpay.orders.create({
-    amount: req.body.amount * 100,
-    currency:"INR"
-  });
-  res.json(order);
-});
+  // TEMP DEMO (replace with backend later)
+  setTimeout(() => {
+    grid.innerHTML = `
+      <div class="clip">
+        <video src="server/clips/${type}/rdy1.mp4" controls></video>
+        <p>₹15</p>
+        <button onclick="buy()">BUY</button>
+      </div>
+    `;
+  }, 500);
+}
 
-app.post("/verify", (req,res)=>{
-  const {razorpay_order_id,razorpay_payment_id,razorpay_signature,file} = req.body;
+function goHome() {
+  document.getElementById("home").style.display = "block";
+  document.getElementById("category").classList.add("hidden");
+}
 
-  const body = razorpay_order_id + "|" + razorpay_payment_id;
+function lockMsg() {
+  alert("This category is locked 🔒 Add clips first!");
+}
 
-  const expected = crypto.createHmac("sha256", process.env.KEY_SECRET)
-    .update(body)
-    .digest("hex");
-
-  if(expected === razorpay_signature){
-    res.json({success:true, download:"/download?file=" + file});
-  } else {
-    res.json({success:false});
-  }
-});
-
-app.get("/download", (req,res)=>{
-  res.download("assets/clips/" + req.query.file);
-});
-
-app.listen(5000,()=>console.log("Server running"));
+function buy() {
+  alert("Payment system will connect with backend next 🔥");
+}

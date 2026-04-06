@@ -3,41 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ClipMorph AI</title>
+
+<title>MorphClip</title>
+
 <link rel="stylesheet" href="style.css">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
+
 <body>
 
-<div class="bg-animation"></div>
+<div class="bg"></div>
 
-<header>
-  <h1 class="logo">CLIPMORPH</h1>
-  <p class="tagline">Cinematic VFX Marketplace</p>
-</header>
+<!-- HOME SCREEN -->
+<div id="home">
 
-<div class="grid">
-
-  <div class="card vfx" onclick="openPanel('vfx')">
-    <div class="glass">VFX PACKS • ₹15</div>
+  <div class="logo">
+    MORPH<span>CLIP</span>
   </div>
 
-  <div class="card green" onclick="openPanel('green')">
-    <div class="glass">GREEN SCREEN • ₹19</div>
-  </div>
+  <div class="subtitle">Golden Cinematic Clip Marketplace</div>
 
-  <div class="card locked">
-    <div class="glass">CRICKET (COMING SOON 🔒)</div>
-  </div>
+  <div class="panel-grid">
 
-  <div class="card locked">
-    <div class="glass">AI REELS (COMING SOON 🔒)</div>
+    <div class="panel vfx" onclick="openCategory('vfx')">
+      <img src="thumbnails/ready.jpg">
+      <h2>VFX STORE</h2>
+      <p>₹15 / Clip</p>
+    </div>
+
+    <div class="panel green" onclick="openCategory('green')">
+      <img src="thumbnails/green.jpg">
+      <h2>GREEN SCREEN</h2>
+      <p>₹19 / Clip</p>
+    </div>
+
+    <div class="panel locked" onclick="lockMsg()">
+      <img src="thumbnails/cric.jpg">
+      <h2>CRICKET REELS</h2>
+      <p>LOCKED</p>
+    </div>
+
+    <div class="panel locked" onclick="lockMsg()">
+      <img src="thumbnails/ai.jpg">
+      <h2>AI REELS</h2>
+      <p>LOCKED</p>
+    </div>
+
   </div>
 
 </div>
 
-<div id="clips"></div>
+<!-- CATEGORY SCREEN -->
+<div id="category" class="hidden">
+
+  <div class="topbar">
+    <button onclick="goHome()">⬅ Back</button>
+    <h1 id="title"></h1>
+  </div>
+
+  <div id="clipGrid"></div>
+
+</div>
 
 <script src="script.js"></script>
+
 </body>
 </html>

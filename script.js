@@ -1,62 +1,83 @@
-const BACKEND = https://clipmorph-backend.onrender.com;
-const KEY = rzp_test_SaDlpGdtt3ve1B;
+const BACKEND = https://clipmorph-server.onrender.com;
 
- function openPanel(type){
-price = 15;
+let unlockedClips = {}; // stores purchased clips
+
+// OPEN CATEGORY
+function openCategory(type) {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("category").classList.remove("hidden");
+
+  document.getElementById("title").innerText = type.toUpperCase();
+
+  const grid = document.getElementById("clipGrid");
+  grid.innerHTML = "Loading clips... 🔄";
+
+  fetch(`${BACKEND}/clips/${type}`)
+    .then(res => res.json())
+    .then(data => {
+      grid.innerHTML = "";
+
+      data.clips.forEach(clip => {
+
+        const isUnlocked = unlockedClips[clip.id];
+
+        const card = document.createElement("div");
+        card.className = "clipCard";
+
+        card.innerHTML = `
+          <div class="thumb">
+            🎬
+          </div>
+
+          <div class="clipInfo">
+            <h3>${clip.name}</h3>
+            <p>₹${clip.price}</p>
+          </div>
+
+          ${
+            isUnlocked
+            ? `<a class="downloadBtn" href="${clip.url}" download>Download</a>`
+            : `<button onclick="buyClip('${clip.id}', '${clip.price}', '${clip.url}')">Buy Now</button>`
+          }
+        `;
+
+        grid.appendChild(card);
+      });
+    });
 }
 
-if(type === "green"){
-clips = ["green/gt1.mp4","green/gt2.mp4","green/gt3.mp4"];
-price = 19;
+// GO HOME
+function goHome() {
+  document.getElementById("home").style.display = "block";
+  document.getElementById("category").classList.add("hidden");
 }
 
-clips.forEach(file=>{
-
-const div = document.createElement("div");
-div.className = "clip";
-
-div.innerHTML = `
-<p>${file}</p>
-<button onclick="buy('${file}',${price})">Buy ₹${price}</button>
-`;
-
-clipsDiv.appendChild(div);
-});
+// LOCKED MSG
+function lockMsg() {
+  alert("Locked category 🔒 Add clips later!");
 }
 
-async function buy(file,price){
+// BUY SYSTEM
+function buyClip(id, price, url) {
 
-const res = await fetch(BACKEND+"/create-order",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({amount:price,file})
-});
+  const options = {
+    key: "PASTE KEY HERE",
+    amount: price * 100,
+    currency: "INR",
+    name: "MorphClip Store",
+    description: "Clip Purchase",
 
-const data = await res.json();
+    handler: function () {
 
-var options={
-key:KEY,
-amount:data.amount,
-currency:"INR",
-order_id:data.id,
+      alert("Payment Successful ✅ Download unlocked!");
 
-handler: async function(response){
+      unlockedClips[id] = true;
 
-const verify = await fetch(BACKEND+"/verify",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({...response,file})
-});
+      // reload current category
+      location.reload();
+    }
+  };
 
-const result = await verify.json();
-
-if(result.success){
-window.location = BACKEND + result.download;
-}else{
-alert("Payment Failed");
-}
-}
-};
-
-new Razorpay(options).open();
+  const rzp = new Razorpay(options);
+  rzp.open();
 }

@@ -1,61 +1,169 @@
-body{
-transform:translateY(-12px) scale(1.08) rotateY(12deg);
+body {
+  margin: 0;
+  font-family: Arial;
+  background: radial-gradient(circle, #111, #000);
+  color: white;
+  overflow-x: hidden;
 }
 
-.card .glass{
-position:absolute;
-bottom:0;
-width:100%;
-padding:12px;
-background:rgba(0,0,0,0.5);
-backdrop-filter: blur(10px);
-font-weight:bold;
+/* glowing background */
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  z-index: -1;
 }
 
-.vfx{
-background:url("assets/thumbnails/ready.jpeg") center/cover;
+/* LOGO */
+.logo {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-top: 20px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px gold;
 }
 
-.green{
-background:url("assets/thumbnails/green.jpeg") center/cover;
+.logo span {
+  color: gold;
 }
 
-.locked{
-background:url("assets/thumbnails/ai.jpeg") center/cover;
-filter:grayscale(1);
-opacity:0.6;
-cursor:not-allowed;
+.subtitle {
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: 30px;
 }
 
-#clips{
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-padding:20px;
+/* PANEL GRID */
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  padding: 20px;
 }
 
-.clip{
-background:rgba(255,255,255,0.08);
-padding:12px;
-border-radius:12px;
-backdrop-filter: blur(10px);
-width:180px;
-animation: pop 0.3s ease;
+/* 3D PANEL */
+.panel {
+  background: rgba(255,255,255,0.05);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  box-shadow: 0 0 25px rgba(255,215,0,0.2);
 }
 
-@keyframes pop{
-from{transform:scale(0.5);opacity:0}
-to{transform:scale(1);opacity:1}
+.panel:hover {
+  transform: rotateY(10deg) scale(1.05);
+  box-shadow: 0 0 40px gold;
 }
 
-button{
-margin-top:8px;
-padding:8px 12px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:linear-gradient(45deg,#00ffe1,#7c4dff);
-color:white;
-font-weight:bold;
+.panel img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.panel h2 {
+  margin: 10px;
+}
+
+.panel p {
+  margin: 10px;
+  opacity: 0.7;
+}
+
+/* LOCKED */
+.locked {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+/* CATEGORY */
+.hidden {
+  display: none;
+}
+
+#category {
+  padding: 20px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  background: gold;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* CLIPS */
+#clipGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.clip {
+  background: #111;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 0 20px rgba(255,215,0,0.1);
+}
+
+.clip video {
+  width: 100%;
+  border-radius: 10px;
+}.clipCard {
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(255,215,0,0.08);
+}
+
+.clipCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px gold;
+}
+
+.thumb {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.clipInfo h3 {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.clipInfo p {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.clipCard button,
+.downloadBtn {
+  display: inline-block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: gold;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
