@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0e0e0e;
+    color: white;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 15px;
+}
+
+/* LOGO */
+.logo {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.logo span {
+    color: #00ffcc;
+}
+
+/* CATEGORIES */
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+.folder {
+    background: #1c1c1c;
+    padding: 10px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.folder:hover {
+    transform: scale(1.05);
+}
+
+.folder img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.folder p {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* LOCKED */
+.locked {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+
+/* SECTION */
+.hidden {
+    display: none;
+}
+
+.back {
+    background: #00ffcc;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+/* CARD */
+.card {
+    background: #1c1c1c;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* VIDEO */
+.video-wrapper {
+    position: relative;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    background: #00ffcc;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #00ddb0;
+}
