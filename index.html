@@ -3,30 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ClipMorph</title>
+<title>ClipMorph AI</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
-<h1 class="logo">CLIPMORPH</h1>
+<div class="bg-animation"></div>
 
-<div class="panel-container">
+<header>
+  <h1 class="logo">CLIPMORPH</h1>
+  <p class="tagline">Cinematic VFX Marketplace</p>
+</header>
 
-  <div class="panel" onclick="openPanel('vfx')">
-    <h2>VFX</h2>
+<div class="grid">
+
+  <div class="card vfx" onclick="openPanel('vfx')">
+    <div class="glass">VFX PACKS • ₹15</div>
   </div>
 
-  <div class="panel" onclick="openPanel('green')">
-    <h2>GREEN</h2>
+  <div class="card green" onclick="openPanel('green')">
+    <div class="glass">GREEN SCREEN • ₹19</div>
   </div>
 
-  <div class="panel locked">
-    <h2>CRICKET 🔒</h2>
+  <div class="card locked">
+    <div class="glass">CRICKET (COMING SOON 🔒)</div>
   </div>
 
-  <div class="panel locked">
-    <h2>AI 🔒</h2>
+  <div class="card locked">
+    <div class="glass">AI REELS (COMING SOON 🔒)</div>
   </div>
 
 </div>

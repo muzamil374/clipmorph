@@ -1,73 +1,62 @@
 const BACKEND = https://clipmorph-backend.onrender.com;
 const KEY = rzp_test_SaDlpGdtt3ve1B;
 
-function openPanel(type){
-
-  const clipsDiv = document.getElementById("clips");
-  clipsDiv.innerHTML = "";
-
-  let clips = [];
-  let price = 0;
-
-  if(type === "vfx"){
-    clips = ["vfx/rdy1.mp4","vfx/rdy2.mp4"];
-    price = 15;
-  }
-
-  if(type === "green"){
-    clips = ["green/gt1.mp4","green/gt2.mp4"];
-    price = 19;
-  }
-
-  clips.forEach(file => {
-
-    const div = document.createElement("div");
-    div.className = "clip-card";
-
-    div.innerHTML = `
-      <p>${file}</p>
-      <button onclick="buyClip('${file}', ${price})">Buy ₹${price}</button>
-    `;
-
-    clipsDiv.appendChild(div);
-  });
+ function openPanel(type){
+price = 15;
 }
 
+if(type === "green"){
+clips = ["green/gt1.mp4","green/gt2.mp4","green/gt3.mp4"];
+price = 19;
+}
 
-async function buyClip(file, price){
+clips.forEach(file=>{
 
-  const res = await fetch(BACKEND + "/create-order",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({amount:price, file})
-  });
+const div = document.createElement("div");
+div.className = "clip";
 
-  const data = await res.json();
+div.innerHTML = `
+<p>${file}</p>
+<button onclick="buy('${file}',${price})">Buy ₹${price}</button>
+`;
 
-  var options = {
-    key: KEY,
-    amount: data.amount,
-    currency: "INR",
-    order_id: data.id,
+clipsDiv.appendChild(div);
+});
+}
 
-    handler: async function (response){
+async function buy(file,price){
 
-      const verify = await fetch(BACKEND + "/verify",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({...response, file})
-      });
+const res = await fetch(BACKEND+"/create-order",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({amount:price,file})
+});
 
-      const result = await verify.json();
+const data = await res.json();
 
-      if(result.success){
-        window.location = BACKEND + result.download;
-      } else {
-        alert("Payment Failed");
-      }
-    }
-  };
+var options={
+key:KEY,
+amount:data.amount,
+currency:"INR",
+order_id:data.id,
 
-  var rzp = new Razorpay(options);
-  rzp.open();
+handler: async function(response){
+
+const verify = await fetch(BACKEND+"/verify",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({...response,file})
+});
+
+const result = await verify.json();
+
+if(result.success){
+window.location = BACKEND + result.download;
+}else{
+alert("Payment Failed");
+}
+}
+};
+
+new Razorpay(options).open();
 }
